@@ -1,0 +1,7 @@
+{
+  "name": "PayCycle",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

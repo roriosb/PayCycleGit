@@ -1,0 +1,31 @@
+
+
+<ion-content [fullscreen]="true" class="content-container">
+  <div class="image-container">
+    <img src="assets/img/logo.png" alt="">
+  </div>
+
+  <ion-card class="login-card">
+   
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="user.usuario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="ingresar()" shape="round" fill="outline" color="dark">Ingresar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="crearCuenta()" shape="round" fill="outline" color="dark"> Crear cuenta</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

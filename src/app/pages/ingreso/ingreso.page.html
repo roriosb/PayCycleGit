@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button click="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Bienvenido a PayCycle
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="info-container">
+
+  <ion-content >
+    <ion-card class="info-container"> 
+      <ion-card-header>
+        <ion-card-title>Ingresar pago</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Ingresa los datos para ingresar la fecha de facturacion de tus pagos
+      </ion-card-content>
+      <ion-button expand="full" (click)="ingresarPago()" shape="round" fill="outline" color="dark">Ir</ion-button>
+    </ion-card>
+  
+    <ion-card class="info-container2">
+      <ion-card-header>
+        <ion-card-title>Ver proximos pagos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Ve todos tus pagos ya ingresados en PayCycle
+      </ion-card-content>
+      <ion-button expand="full" (click)="ingresarVista()" shape="round" fill="outline" color="dark">Ver Pagos</ion-button>
+    </ion-card>
+  </ion-content>
+  
+</ion-content>

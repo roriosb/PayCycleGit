@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button click="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Crear cuenta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" >
+  <ion-card class="register-card">
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="datos.nombreUsuario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="datos.contrasena"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="email" [(ngModel)]="datos.correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" >Numero telefonico</ion-label>
+        <ion-input type="email" [(ngModel)]="datos.numero" placeholder="+56 9"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button expand="block" (click)="registrar()" shape="round" fill="outline" color="dark">Registrarse</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

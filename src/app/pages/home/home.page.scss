@@ -1,0 +1,39 @@
+.container-centrado {
+  margin-top: 20%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: slide-up 1s ease; 
+
+
+
+  @keyframes slide-up {
+     from {
+       transform: translateY(100%); 
+     to {
+       transform: translateY(0); 
+     }
+   }
+ } 
+ }
+
+
+.btn-guardar{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: slide-up 1s ease; 
+
+
+
+  @keyframes slide-up {
+     from {
+       transform: translateY(100%); 
+     to {
+       transform: translateY(0); 
+     }
+   }
+ } 
+ }

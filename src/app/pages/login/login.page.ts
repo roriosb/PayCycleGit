@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
           user: this.user // Al state le asigno un objeto con clave valor
         }
       }
-      this.router.navigate(['/ingreso'], navigationextras);
+      this.router.navigate(['/home'], navigationextras);
     } else {
       this.presentToast("bottom", "Falta ingresar " + this.field, 3500);
     }

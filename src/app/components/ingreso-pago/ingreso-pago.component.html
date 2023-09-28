@@ -1,0 +1,41 @@
+
+
+<ion-content [fullscreen]="true">
+  <div class="container-centrado ">
+    <ion-card class="ingreso-datos">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>Ingreso de pago</ion-card-title>
+        
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item >
+          <ion-label position="stacked">Nombre del Servicio</ion-label>
+          <ion-input type="text" [(ngModel)]="datos.nombreServicio"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-label position="stacked">Fecha de Facturación</ion-label>
+          <ion-input type="date" [(ngModel)]="datos.fechaFacturacion"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-label position="stacked">Monto de Facturación</ion-label>
+          <ion-input type="number"  [(ngModel)]="datos.montoFacturacion"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-label position="stacked">Recordatorio</ion-label>
+          <ion-select placeholder="Seleccione una opción" [(ngModel)]="datos.recordatorio" >
+            <ion-select-option>Cada día </ion-select-option>
+            <ion-select-option>Cada semana</ion-select-option>
+            <ion-select-option>1 dias antes</ion-select-option>
+            <ion-select-option>5 dias antes</ion-select-option>
+            
+          </ion-select>
+        </ion-item>
+       
+          
+            
+            
+        <ion-button shape="block"  (click)="guardar()"  shape="round" fill="outline" color="dark" class="ion-text-center">Guardar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

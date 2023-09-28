@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -9,62 +8,34 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  data: any;
-  datos: any = {
-  
-    nombreServicio: "",
-    fechaFacturacion: "",
-    montoFacturacion: "",
-    recordatorio: ""
-  };
 
-  constructor(
-    private activateRoute: ActivatedRoute,
-    private router: Router,
-    public alertController: AlertController,
-    public loadingCtrl: LoadingController
-  ) {
-  
-  }
+    /**
+   * En el constructor del HomePage se colocan por parametros
+   * todas aquellas propiedades con el siguiente formato
+   * private = visibilidad
+   * activeRoute = identificador
+   * ActiveRoute = Tipo de Objeto
+   * : Indica que el identificador sera de la clase posterior 
+   * a los : puntos
+   * 
+   */
 
-  async presentAlert(titulo: string, message: string) {
-    const alert = await this.alertController.create({
-      header: titulo,
-      message: message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-
-  async guardar() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando...', 
-      spinner: 'crescent', 
-    });
+  constructor(private activateRoute: ActivatedRoute, 
+    private router: Router, 
+    public alertController:AlertController) {
+    // Se llama a la ruta activa y se obtiene sus parametros mediante una suscripción
+    
+} 
+segmentChanged($event:any){
+  console.log($event);
+  let direccion=$event.detail.value;
+  this.router.navigate(['home/'+direccion])
+}
+back(){
   
-    await loading.present();
-  
-    setTimeout(() => {
-      loading.dismiss();
-      if (
-        this.datos.nombreServicio != "" &&
-        this.datos.fechaFacturacion != "" &&
-        this.datos.montoFacturacion != "" &&
-        this.datos.recordatorio != ""
-      ) {
-        this.presentAlert("Datos guardados", "Los datos se han guardado correctamente.");
-      } else {
-        this.presentAlert("Datos Incompletos", "Por favor, complete todos los campos antes de guardar.");
-      }
-    }, 500); 
-  }
+  this.router.navigate(['/login']);
+}
 
-    back(){
-  
-      this.router.navigate(['/ingreso']);
-    }
 
-  }
-  
+}
 

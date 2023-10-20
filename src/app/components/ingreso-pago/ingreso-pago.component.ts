@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { BdlocalService } from 'src/app/services/bdlocal.service';
+import { InterfaceTs } from 'src/app/interfaces/interface.ts';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-ingreso-pago',
@@ -9,57 +17,44 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./ingreso-pago.component.scss'],
 })
 export class IngresoPagoComponent  implements OnInit {
-  data: any;
-  datos: any = {
-  
-    nombreServicio: "",
-    fechaFacturacion: "",
-    montoFacturacion: "",
-    recordatorio: ""
-  };
+ 
+  agenda: InterfaceTs[]=[];
+  private _storage: Storage | null=null;
+  nombreServicio!:string;
+  fechaFacturacion!:Date;
+  montoFacturacion!: number;
+  recordatorio!: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
     public alertController: AlertController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public bdlocalservice: BdlocalService,
+    private storage: Storage
   ) { 
-
+    this.retornarAgenda();
+   
+   }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
-  async presentAlert(titulo: string, message: string) {
-    const alert = await this.alertController.create({
-      header: titulo,
-      message: message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-
-  async guardar() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando...', 
-      spinner: 'crescent', 
-    });
   
-    await loading.present();
-  
-    setTimeout(() => {
-      loading.dismiss();
-      if (
-        this.datos.nombreServicio != "" &&
-        this.datos.fechaFacturacion != "" &&
-        this.datos.montoFacturacion != "" &&
-        this.datos.recordatorio != ""
-      ) {
-        this.presentAlert("Datos guardados", "Los datos se han guardado correctamente.");
-      } else {
-        this.presentAlert("Datos Incompletos", "Por favor, complete todos los campos antes de guardar.");
-      }
-    }, 500); 
-    
+  guardar(){
+    this.bdlocalservice.guardar(this.nombreServicio,this.fechaFacturacion, this.montoFacturacion,
+      this.recordatorio);
+  }
+  borrarContacto(){
+    this.bdlocalservice.borrarContacto(this.nombreServicio);
+  }
+  retornarAgenda(){
+    this.agenda=this.bdlocalservice.retornarAgenda();
   }
 
-  ngOnInit() {}
 
-}
+  }
+
+
+
+
+

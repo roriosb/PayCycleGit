@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AuntenticacionService } from 'src/app/services/auntenticacion.service';
 
 
 @Component({
@@ -9,64 +11,60 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  loginForm : FormGroup
 
  
-  user = {
-    usuario: "",
-    password: ""
-  }
-  field: string = "";
+  
 
-  constructor(private router: Router, public toastController: ToastController) { }
+
+  constructor(
+    private router: Router, 
+    public toastController: ToastController,
+    public alertController: AlertController,
+   
+    public loadingCtrl: LoadingController,
+    public formBuilder:FormBuilder,
+    public authService:AuntenticacionService
+    ) { }
 
   ngOnInit() {
+    this.loginForm =this.formBuilder.group({
+      
+      correo : ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")]],
+      pass : ['', [Validators.required, Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-z])")]]
+    })
+  }
+  get errorRegistro(){
+    return this.loginForm?.controls;
   }
 
-  ingresar() {
-    console.log(this.user)
-    if (this.validateModel(this.user)) {
-      this.presentToast("bottom", "Bienvenido " + this.user.usuario);
-      // Se declara e instancia un elemento de tipo NavigationExtras
-      let navigationextras: NavigationExtras = {
-        state: {
-          user: this.user // Al state le asigno un objeto con clave valor
-        }
+  async ingresar(){
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    if(this.loginForm?.valid){
+      const user = await this.authService.registrarUsuario(this.loginForm.value.correo, this.loginForm.value.pass).catch((error) =>{
+        console.log(error);
+        loading.dismiss()
+      })
+
+      if(user){
+        loading.dismiss()
+        this.router.navigate(['/home'])
+      }else{
+        console.log('credenciales incorrectas')
       }
-      this.router.navigate(['/home'], navigationextras);
-    } else {
-      this.presentToast("bottom", "Falta ingresar " + this.field, 3500);
-    }
-  }
 
-  validateModel(model: any) {
-    // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor
-    for (var [key, value] of Object.entries(model)) {
-      // Si un valor es "" se retornará false y se avisará de lo faltante
-      if (value == "") {
-        // Se asigna el campo faltante
-        this.field = key;
-        // Se retorna false
-        return false;
       }
-    }
-    return true;
   }
 
-  async presentToast(position: 'bottom',
-    message: string,
-    duration?: number) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: duration ? duration : 2000,
-      position: position,
-    });
-
-    await toast.present();
-  }
+ 
 
   crearCuenta() {
     this.router.navigate(['/crear']);
   }
   
+  reinicioPass(){
+    this.router.navigate(['/reiniciar-pass'])
+  }
 }
 

@@ -1,42 +1,55 @@
-<ion-content [fullscreen]="true" class="content-container">
-  <div class="image-container">
-    <img src="assets/img/logo.png" alt="">
-  </div>
+<ion-content>
+  <div class="container">
+    <div class="login-body">
+      <div class="top-login">
+        <div class="title">PayCycle</div>
+        <div class="line-1"></div>
+        <div class="line-2"></div>
+        <div class="line-3"></div>
+        <div class="line-11"></div>
+        <div class="line-22"></div>
+        <div class="line-33"></div>
+        <div class="line-111"></div>
+        <div class="line-222"></div>
+        <div class="line-333"></div>
+      </div>
+      <div class="character-circel">
+        <div class="character-body">
+          <div class="head"></div>
+          <div class="hair1"></div>
+          <div class="hair2"></div>
+        </div>
+      </div>
+      <div class="character-bacground"></div>
+      <div class="character-bacground2"></div>
+      <div class="character-bacground3"></div>
+      <div class="character-circle1"></div>
+      <div class="character-circle2"></div>
 
-  <form [formGroup]="loginForm">
-    <ion-card class="login-card">
-      <ion-card-content>
+      <div class="login-box">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="morab31"></div>
+        <div class="morab32"></div>
+        <div class="morab33"></div>
+        <div class="morab34"></div>
         <ion-item>
-          <ion-label position="floating">Ingrese su correo</ion-label>
+          <ion-label position="floating">Correo</ion-label>
           <ion-input type="text" formControlName="correo"></ion-input>
         </ion-item>
-        <div style="padding-top: -26px;padding-bottom: 16px;"
-        *ngIf="this.loginForm.controls?.['correo'].touched && this.loginForm.controls?.['correo'].invalid">
-        <ion-text *ngIf="errorRegistro.correo.errors?.required" color="danger">Correo invalido</ion-text>
-      </div>
-      
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input type="password" formControlName="pass"></ion-input>
         </ion-item>
-        <div style="padding-top: -26px;padding-bottom: 16px;"
-        *ngIf="this.loginForm.controls?.['pass'].touched && this.loginForm.controls?.['pass'].invalid">
-        <ion-text *ngIf="errorRegistro.correo.errors?.required" color="danger">Contraseña invalida</ion-text>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="ingresar()"  fill="outline" color="dark" style="margin-top: -110px;">Ingresar</ion-button>
+            <ion-button expand="block" (click)="crearCuenta()" fill="outline" color="dark" style="margin-top: -70px;">Crear cuenta</ion-button>
+            <ion-button expand="block" (click)="reinicioPass()" fill="outline" color="dark" style="margin-top: -30px;">Olvidó su contraseña?</ion-button>
+          </ion-col>
+        </ion-row>
       </div>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="ingresar()" shape="round" fill="outline" color="dark">Ingresar</ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="crearCuenta()" shape="round" fill="outline" color="dark">Crear cuenta</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" (click)="reinicioPass()" shape="round" fill="outline" color="dark">Olvidó su contraseña?</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-  </form>
+      <div class="down-login"></div>
+    </div>
+  </div>
 </ion-content>

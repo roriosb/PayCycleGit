@@ -37,3 +37,26 @@
    }
  } 
  }
+/* Estilos personalizados para la página home */
+
+ion-toolbar {
+  --background: #3e004d; /* Color de fondo de la barra de herramientas */
+}
+
+ion-title {
+  color: white;
+  text-align: center;
+}
+
+ion-segment-button {
+  --color: #aa0247; /* Color de los botones del segmento */
+  --color-checked: #ffffff; /* Color de los botones del segmento seleccionados */
+}
+
+ion-segment-button[value="ingresoPago"] ion-icon {
+  color: #aa0247; /* Color del icono de ingresoPago */
+}
+
+ion-segment-button[value="verPago"] ion-icon {
+  color: #aa0247; /* Color del icono de verPago */
+}

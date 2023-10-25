@@ -31,33 +31,35 @@ export class LoginPage implements OnInit {
     this.loginForm =this.formBuilder.group({
       
       correo : ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")]],
-      pass : ['', [Validators.required, Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-z])")]]
+      pass : ['', [Validators.required, Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")]]
     })
   }
   get errorRegistro(){
     return this.loginForm?.controls;
   }
-
-  async ingresar(){
+  async ingresar() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
-    if(this.loginForm?.valid){
-      const user = await this.authService.registrarUsuario(this.loginForm.value.correo, this.loginForm.value.pass).catch((error) =>{
-        console.log(error);
-        loading.dismiss()
+    // console.log(this.email + this.password);
+    if (this.loginForm.valid) {
+
+      //  await  loading.dismiss();
+      const user = await this.authService.loginUsuario(this.loginForm.value.correo, this.loginForm.value.pass).catch((err) => {
+        this.presentToast(err)
+        console.log(err);
+        loading.dismiss();
       })
 
-      if(user){
-        loading.dismiss()
+      if (user) {
+        loading.dismiss();
         this.router.navigate(['/home'])
-      }else{
-        console.log('credenciales incorrectas')
       }
+    } else {
+      return console.log('Please provide all the required values!');
+    }
 
-      }
   }
-
- 
+  
 
   crearCuenta() {
     this.router.navigate(['/crear']);
@@ -65,6 +67,17 @@ export class LoginPage implements OnInit {
   
   reinicioPass(){
     this.router.navigate(['/reiniciar-pass'])
+  }
+  async presentToast(message: undefined) {
+    console.log(message);
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500,
+      position: 'top',
+    });
+
+    await toast.present();
   }
 }
 

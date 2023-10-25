@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuntenticacionService } from 'src/app/services/auntenticacion.service';
+
 @Component({
   selector: 'app-crear',
   templateUrl: './crear.page.html',
@@ -25,7 +26,7 @@ export class CrearPage implements OnInit {
     
    }
 
-  OnInit(){
+  ngOnInit(){
     this.regForm =this.formBuilder.group({
       
       correo : ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")]],
@@ -36,20 +37,20 @@ export class CrearPage implements OnInit {
   get errorRegistro(){
     return this.regForm?.controls;
   }
-  async registrarse(){
+  async registrarse() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
+  
     if (this.regForm.valid) {
-
       const user = await this.authService.registrarUsuario(this.regForm.value.correo, this.regForm.value.pass).catch((err) => {
-        this.presentToast(err)
+        this.presentToast(err);
         console.log(err);
         loading.dismiss();
-      })
-
+      });
+  
       if (user) {
         loading.dismiss();
-        this.router.navigate(['/home'])
+        this.router.navigate(['/login']);
       }
     } else {
       return console.log('Please provide all the required values!');
@@ -58,14 +59,11 @@ export class CrearPage implements OnInit {
   
   
 
-  ngOnInit() {
-    
-  }
-
   
   back(){
     this.router.navigate(['/ingreso']);
     }
+
     async presentToast(message: undefined) {
       console.log(message);
       

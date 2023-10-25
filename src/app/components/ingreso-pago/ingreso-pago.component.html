@@ -30,18 +30,20 @@
             
           </ion-select>
         </ion-item>
-        <ion-item *ngFor="let item of agenda; let index">
-          <ion-avatar slot="start">
-            <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-          </ion-avatar>
-          <ion-label>
-            <h1>{{item.strNombreServicio}}</h1>
-            <p>{{item.dateFechaFacturacion}}</p>
-            <p>{{item.intMonto}}</p>
-            <p>{{item.strRecordatorio}}</p>
-            
-          </ion-label>
-        </ion-item>
+        <ion-card>
+          <ion-item *ngFor="let item of agenda; let index">
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+            </ion-avatar>
+            <ion-label>
+              <h1>{{item.strNombreServicio}}</h1>
+              <p>{{item.dateFechaFacturacion}}</p>
+              <p>{{item.intMonto}}</p>
+              <p>{{item.strRecordatorio}}</p>
+          
+            </ion-label>
+          </ion-item>
+        </ion-card>
        
           
             
